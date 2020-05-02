@@ -28,7 +28,7 @@ class CategoryTag extends Component {
         super(props);
         this.state = {
             categoryList: [],
-            tagList: [{ name: 'aaa' }, { name: 'aaa' }, { name: 'aaa' }]
+            tagList: [{ name: 'aaa' }, { name: 'bbb' }, { name: 'ccc' }]
         }
     }
     formRef = React.createRef();
@@ -38,9 +38,12 @@ class CategoryTag extends Component {
     onFinish = (values) => {
         console.log(values);
     }
-    delCategory = (record) => [
-        message.success('success')
-    ]
+    editCategory = (record) => {
+        message.success('edit success');
+    }
+    delCategory = (record) => {
+        message.success('del success');
+    }
     render() {
         const { categoryList, tagList } = this.state;
         return (
@@ -54,7 +57,10 @@ class CategoryTag extends Component {
                             <div className={style['pannel-body']}>
                                 {categoryList.map(item => (
                                     <Tag
-                                        conten={item.name}
+                                        content={item.name}
+                                        onLeftClick={this.editCategory}
+                                        onRightClick={this.delCategory}
+                                        key={item.name}
                                     />
                                 ))}
                             </div>
@@ -69,6 +75,9 @@ class CategoryTag extends Component {
                                 {tagList.map(item => (
                                     <Tag
                                         content={item.name}
+                                        onLeftClick={this.editCategory}
+                                        onRightClick={this.delCategory}
+                                        key={item.name}
                                     />
                                 ))}
                             </div>
